@@ -31,18 +31,15 @@
   (else (cons (full_copy_list (car list)) (full_copy_list (cdr list))))))
 
 (define (node_counter tree)
-  (cond 
+  (cond
     ((null? tree) 0)
     (else(+ 1 (node_counter(second tree)) (node_counter(third tree))))))
 
 (define (is_binary_tree_order tree)
   (cond
     ((null? tree) #t)
-    ((and (null? (second tree)) (null? (third tree))) #t)
-    ((null? (second tree)) #t)
-    (( > (car (second tree)) (car tree)) #f)
-    ((null? (third tree)) #t)
-    (( < (car (third tree)) (car tree)) #f)
+    ((and (not (null? (second tree))) ( > (car (second tree)) (car tree))) #f)
+    ((and (not (null? (third tree))) ( < (car (third tree)) (car tree))) #f)
     (else (and (is_binary_tree_order(second tree)) (is_binary_tree_order(third tree))))
    )
 )
